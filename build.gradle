@@ -5,15 +5,14 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
-// TODO: uncomment to be able to fetch packages in your own repository
-//    maven {
-//        name = "GitHubPackages"
-//        url = uri("https://maven.pkg.github.com/<your-username>/printscript")
-//        credentials {
-//            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-//            password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-//        }
-//    }
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/ing-sist/printscript")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 java {
@@ -27,8 +26,24 @@ test {
     maxHeapSize = "7m" // maximum heap size
 }
 
+def psVersion = "1.4-SNAPSHOT"
+def psModules = [
+        "lexer",
+        "formatter",
+        "token",
+        "parser",
+        "interpreter",
+        "ast",
+        "cli",
+        "common",
+        "analyzer"
+]
+
 dependencies {
     testImplementation 'junit:junit:4.13.1'
+    psModules.each { module ->
+        implementation("org.printscript:${module}:${psVersion}")
+    }
 }
 
 test {
