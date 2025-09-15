@@ -27,7 +27,7 @@ test {
     maxHeapSize = "7m" // maximum heap size
 }
 
-def psVersion = "1.4-SNAPSHOT"
+def psVersion = "1.5-SNAPSHOT"
 def psModules = [
         "lexer",
         "formatter",
