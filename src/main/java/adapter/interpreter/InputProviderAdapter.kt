@@ -1,4 +1,4 @@
-package adapter
+package adapter.interpreter
 
 import interpreter.InputProvider
 import interpreter.PrintEmitter

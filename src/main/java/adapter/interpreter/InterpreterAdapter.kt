@@ -1,4 +1,4 @@
-package adapter
+package adapter.interpreter
 
 import AstNode
 import Lexer

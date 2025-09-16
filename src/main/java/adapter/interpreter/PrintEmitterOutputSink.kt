@@ -1,4 +1,4 @@
-package adapter
+package adapter.interpreter
 
 import interpreter.PrintEmitter
 import runtime.providers.OutputSink
