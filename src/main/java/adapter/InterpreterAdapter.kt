@@ -10,10 +10,9 @@ import interpreter.InputProvider
 import interpreter.PrintEmitter
 import interpreter.PrintScriptInterpreter
 import parser.Parser
-import ps.lang.errors.InterpreterException
-import ps.lang.errors.NoStatementExecutorError
-import ps.runtime.core.InterpreterRuntimeFactory
-import ps.runtime.providers.SystemEnvProvider
+import language.errors.InterpreterException
+import language.errors.NoStatementExecutorError
+import runtime.core.InterpreterRuntimeFactory
 import validators.provider.DefaultValidatorsProvider
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -43,7 +42,11 @@ class PrintScriptInterpreterAdapter : PrintScriptInterpreter {
             val reader = InputStreamReader(src, Charsets.UTF_8)
             val tokenRule = RuleGenerator.createTokenRule(version)
             val lexer = Lexer(reader, tokenRule)
-            val tokenProvider = LexerTokenProvider(lexer, false)
+            val tokenProvider = LexerTokenProvider(
+                lexer,
+                false,
+                false
+            )
 
             // Parser
             val validatorsProvider = getValidatorsProviderForVersion(version)
@@ -71,12 +74,14 @@ class PrintScriptInterpreterAdapter : PrintScriptInterpreter {
                             // Fin de input sin error
                             break
                         } else {
-                            handler.reportError("Parse error: $msg")
+                            handler.reportError("Parser Error: $msg")
                             break
                         }
                     }
                 }
             }
+        } catch (e: OutOfMemoryError) {
+            handler.reportError("Java heap space")
         } catch (e: NoStatementExecutorError) {
             handler.reportError("No statement executor: ${e.message}")
         } catch (e: InterpreterException) {

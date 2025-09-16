@@ -1,8 +1,7 @@
 package adapter
 
 import interpreter.PrintEmitter
-import ps.runtime.providers.ConsoleOutputSink
-import ps.runtime.providers.OutputSink
+import runtime.providers.OutputSink
 
 class PrintEmitterOutputSink(
     private val emitter: PrintEmitter

@@ -6,7 +6,7 @@ import interpreter.PrintEmitter
 class InputProviderAdapter(
     private val javaProvider: InputProvider,
     private val emitter: PrintEmitter
-) : ps.runtime.providers.InputProvider {
+) : runtime.providers.InputProvider {
     override fun readInput(prompt: String): String {
         emitter.print(prompt)
         return javaProvider.input(prompt)
