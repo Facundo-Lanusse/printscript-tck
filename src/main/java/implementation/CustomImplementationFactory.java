@@ -1,9 +1,9 @@
 package implementation;
 
-import adapter.InterpreterAdapter;
 import interpreter.PrintScriptFormatter;
 import interpreter.PrintScriptInterpreter;
 import interpreter.PrintScriptLinter;
+import adapter.PrintScriptInterpreterAdapter;
 
 public class CustomImplementationFactory implements PrintScriptFactory {
 
@@ -15,7 +15,7 @@ public class CustomImplementationFactory implements PrintScriptFactory {
 
         // Dummy impl: return (src, version, emitter, handler) -> { };
 
-        return new InterpreterAdapter();
+        return new PrintScriptInterpreterAdapter();
 
     }
 

@@ -1,12 +1,14 @@
 package adapter
 
 import interpreter.InputProvider
-
+import interpreter.PrintEmitter
 
 class InputProviderAdapter(
-    val provider: InputProvider
-): ps.runtime.providers.InputProvider {
+    private val javaProvider: InputProvider,
+    private val emitter: PrintEmitter
+) : ps.runtime.providers.InputProvider {
     override fun readInput(prompt: String): String {
-        return provider.input(prompt)
+        emitter.print(prompt)
+        return javaProvider.input(prompt)
     }
 }

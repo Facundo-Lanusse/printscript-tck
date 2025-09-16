@@ -1,13 +1,13 @@
 package adapter
 
 import interpreter.PrintEmitter
-import ps.lang.errors.InterpreterException
+import ps.runtime.providers.ConsoleOutputSink
 import ps.runtime.providers.OutputSink
 
-class OutputSinkAdapter(
-    val printEmitter: PrintEmitter
+class PrintEmitterOutputSink(
+    private val emitter: PrintEmitter
 ) : OutputSink {
     override fun print(message: String) {
-        printEmitter.print(message)
+        emitter.print(message)
     }
 }

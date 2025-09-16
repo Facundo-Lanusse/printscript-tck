@@ -4,7 +4,7 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
+    //mavenLocal()
     mavenCentral()
     maven {
         name = "GitHubPackages"
@@ -27,7 +27,7 @@ test {
     maxHeapSize = "7m" // maximum heap size
 }
 
-def psVersion = "1.5-SNAPSHOT"
+def psVersion = "3.0-SNAPSHOT"
 def psModules = [
         "lexer",
         "formatter",
