@@ -93,7 +93,7 @@ class PrintScriptInterpreterAdapter : PrintScriptInterpreter {
 
     private fun getValidatorsProviderForVersion(version: String): DefaultValidatorsProvider =
         when (version) {
-            "1.0", "1.1" -> DefaultValidatorsProvider()
+            "1.0", "1.1" -> DefaultValidatorsProvider(version)
             else -> throw IllegalArgumentException("Unsupported PrintScript version: $version")
         }
 

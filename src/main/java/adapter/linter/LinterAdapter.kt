@@ -42,7 +42,7 @@ class LinterAdapter : PrintScriptLinter {
             val tokenRule = RuleGenerator.createTokenRule(version)
             val lexer = Lexer(inputReader, tokenRule)
             val tokenProvider = LexerTokenProvider(lexer, readSpace = false, readNewline = false)
-            val validatorsProvider = DefaultValidatorsProvider()
+            val validatorsProvider = DefaultValidatorsProvider(version)
             val parser = Parser(validatorsProvider)
 
             val astNodes = mutableListOf<AstNode>()
@@ -78,7 +78,7 @@ class LinterAdapter : PrintScriptLinter {
         return AnalyzerConfig.fromPath(tempFile.path, tckDefs)
     }
 
-    private fun createTckRuleDefinitions(): List<RuleDefinition<out RuleConfig>> =
+    private fun createTckRuleDefinitions(): List<RuleDefinition<RuleConfig>> =
         listOf(
             // identifier_format
             object : RuleDefinition<IdentifierNamingConfig> {
@@ -132,6 +132,7 @@ class LinterAdapter : PrintScriptLinter {
     private fun createRulesForTckIds(): List<AnalyzerRule<out RuleConfig>> {
         val defs = createTckRuleDefinitions()
         return listOf(
+            @Suppress("UNCHECKED_CAST")
             IdentifierNamingRule(defs[0] as RuleDefinition<IdentifierNamingConfig>),
             SimpleArgRule(defs[1] as SimpleArgDef),
             SimpleArgRule(defs[2] as SimpleArgDef),
