@@ -23,5 +23,5 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         env:
-          GPR_USER: 'Facundo-Lanusse'
-          GPR_KEY: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: 'Facundo-Lanusse'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
